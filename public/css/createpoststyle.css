@@ -1,0 +1,88 @@
+body {
+    background-color: #bcd9ea;
+}
+#createpost {
+    width: 80%;
+    border: 1px solid #FA773C;
+    padding: 3%;
+    margin: 0% 10%;
+    margin-bottom: 100px;
+    display: flexbox;
+    font-family: sans-serif;
+    font-size: 14px;
+    color:#576A7A;
+    background-color: #ffede3;
+}
+
+hr {
+    border-top: 2px solid #FA773C;
+}
+
+#headingpost {
+    margin: 15px;
+    padding-bottom: 20px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: sans-serif cursive;
+    font-style: bold;
+    font-size: 50px;
+}
+
+#headingpost {
+    font-family: sans-serif cursive;
+    font-style: bold;
+    font-size: 50px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+input[type="file"] {
+    margin: 0% 0%;
+    padding: 5px;
+    border: 1px solid #FA773C;
+    color: #FA773C;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+label {
+    font-size: 20px;
+    display: flexbox;
+    color: black;
+}
+
+
+#recipe_name, #recipe_category, #recipe_description, #recipe_ingredients, #recipe_procedures {
+    margin-top: 5px;
+    vertical-align: top;
+    text-align: left;
+    width: 100%;
+    display: flexbox;
+    font-family: sans-serif;
+    font-size: 18px;
+    color: #576A7A;
+    padding: 1%;
+}
+
+textarea {
+    height: 150px;
+}
+
+input[type="submit"] {
+    display: flexbox;
+    padding: 1% 4%;
+    background-color: #FA773C;
+    color: white;
+    border: 1px solid #FA773C;
+    font-family: sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#send:hover {
+    background-color: #d66633
+}
+img {
+    max-width: 350px;
+}
+

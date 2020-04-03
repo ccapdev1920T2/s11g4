@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <title>{{fullname}}'s Favorite Recipes</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src=“jquery-3.4.1.min.js” type=“text/javascript”></script>
+        
+        
+        <link rel="stylesheet" href="../css/profilestyle.css">
+        <link rel="stylesheet" href="../css/navstyle.css">
+        <link rel="stylesheet" href="../css/recipeposts.css">
+        
+        <script>
+            $(document).ready(function(){
+                $(".search-icon").click(function(){
+                    $(".search-box").toggle();
+                    $(".search-box input[type='text']").focus();
+                });
+            });
+            
+            
+            function openEditForm() {
+                document.getElementById("editForm").style.display = "block";
+                document.getElementById("disablediv").style.display = "block";
+            }
+
+            function closeEditForm() {
+                document.getElementById("editForm").style.display = "none";
+                document.getElementById("disablediv").style.display = "none";
+            }            
+            
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#pic').attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+        </script>
+        
+    </head>
+    
+    <body>
+        <div id = "wholepost">
+        {{#each profile}}
+        <div id = "profile">
+            <img src="{{profilepic}}" id ="imageprof" alt="Avatar">
+            <div id = "profilename"> {{fullname}} </div>
+            <a href="#"><div id = "uname">@{{uname}}</div></a>
+            <div class = "usercredibility" style="align-items: center; justify-content: center;">
+                <i class = "material-icons">verified_user</i>
+                <div id = "credibility"> {{credibility}} </div>
+            </div>
+            <div id = "favorites"> <i class = "material-icons">favorite</i> {{favorites}} Favorites </div>
+            
+            <input type="button" class = "buttons" value = "Edit Profile" id = "editprofilebtn" onclick = "openEditForm()">
+            <a href ="../../favusers/faveusers-sam/user-favorites.html"><input type="button" class = "buttons" value = "Favorite Users"></a>
+            <input type="button" class = "buttons" value = "Favorite Recipes" id="active">
+        {{/each}}
+        </div>  
+        
+        <div id = "posts">
+            
+            <div id = "headingpost">Favorite Recipes<br></div>
+            
+            {{#each favrecipes}}
+            <div class = "content">
+                <a href="{{ref}}">
+                <img src = "{{recipe_img}}" class = "posting">
+                <span class = "recipe-name"> {{recipe_name}} </span> <br>
+                <p class = "recipedesc">{{recipe_description}}</p>
+                </a>
+            </div>
+            {{/each}}
+            
+        </div>
+            
+            
+            <div class="form-popup" id="editForm">
+                <form action="/action_page.php" class="form-container" enctype="multipart/form-data">
+                    <h1>Edit Profile</h1>
+                    
+                    <div><label for="editimageprof"><b>Profile Picture</b></label></div>
+                    <input type="file" id="editimageprof" name="editimageprof" accept="image/*" onchange="readURL(this);" >
+
+                    <div><label for="editprofilename"><b>Full Name</b></label></div>
+                    <input type="text" placeholder="" name="editprofilename" >
+
+                    <div><label for="editusername"><b>Username</b></label></div>
+                    <input type="text" placeholder="" name="editusername" >
+                    
+                    <div><label for="credibility"><b>Credibility</b></label></div>
+                    <input type="text" placeholder="" name="credibility">
+                    
+                    <div class="btn-container">
+                        <button type="button" class="btn" onclick="closeEditForm()">Save</button> <!-- type="submit"??? -->
+                        <button type="button" class="btn cancel" onclick="closeEditForm()">Close</button>
+                    </div>
+
+                </form>
+            </div>
+            
+            
+            <div id="disablediv">
+            
+            
+            </div>
+        
+        </div>
+        
+  </body>
+    
+</html>

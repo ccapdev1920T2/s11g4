@@ -1,0 +1,161 @@
+#profile {
+    width: 250px;
+    height: 430px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    margin-top: 100px;
+    background: #FFEDE3;
+    position: sticky;
+    top: 10%;
+}  
+
+#imageprof {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 20px auto 20px auto;
+    display: block;
+}
+
+#profilename {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+#uname {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    color: #F26A2D;
+}
+
+#uname:hover {
+    text-decoration: underline;
+}
+
+#credibility {
+    font-family: sans-serif;
+    font-size: 16px;
+    display: flex;
+    margin: 0px;
+}
+
+#favorites {
+    font-family: sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: dimgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+            
+.buttons, .form-container .btn{
+    width: 150px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    font-family: sans-serif;
+    background-color: #576A7A;
+    color: white;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    cursor: pointer
+}    
+
+.buttons:hover, .form-container .btn:hover{
+    background-color: #005255;
+    color: white !important;
+	transition: .25s;
+}   
+            
+.usercredibility {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0px 0px 0px 0px;
+    color: dimgray;
+    display: flex;
+    align-items: center;
+}
+
+.material-icons {
+    color: #FA773C;
+    font-size: 20px;
+    margin: 0px 5px 0px 0px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    margin-top: 100px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-container h1{
+    margin-bottom: 20px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=file] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 15px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .cancel:hover{
+    transition: .25s;
+    background-color: #8e1600;
+}
+
+.btn-container{
+    text-align: center;
+}
+
+#disablediv {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background-color: black;
+    z-index: 1;
+    display: none;
+}
+
+
+
+

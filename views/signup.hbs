@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Sign Up</title>
+        
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="../css/signupstyle.css">
+        <link rel="stylesheet" href="../css/navstyle.css">
+        
+          
+    </head>
+    
+    <body>
+        <div class="wrap">
+            <h2>Sign Up Here</h2>
+            <form id = "signup" class = "signup" action = "/login/insert" method = "POST" enctype="multipart/form-data">
+                <input type="text" id = "fullname" name = "fullname" class="fullnamebox" placeholder="Full Name" required>
+                <input type="email" id = "email" name = "email" class="emailbox" placeholder="Email" required>
+                <input type="text" id = "uname" name = "uname" class="usernamebox" placeholder="Username" maxlength="25" required>
+                <div class="tooltip">
+                <input type="text" id = "credibility" name = "credibility" class="credbilitybox" placeholder="Credibility" required>
+                <span class="tooltiptext">Credibility is your “status” in making recipes (eg. chef, homecook, baking enthusiast, etc.)</span>
+                </div>
+                <input type="password" id = "password" name = "password" class="pwdbox" placeholder="Password" required>
+                <input type="password" id = "cpwd" name = "cpwd" class="cpwdbox" placeholder="Confirm Password" required>
+                <div id="upload"><label for="uploadimageprof"><b>Upload Profile Picture</b></label></div>
+                <input type="file" id="imageprof" name="imageprof" accept="image/*" onchange="readURL(this);" required >
+                <img id="pic" src="" alt = "">
+                <input type="submit" class="submitbtn" id = "submitbtn" value="Submit">
+            </form>
+        </div>
+        
+        
+        
+        
+        <script>
+            $(document).ready(function(){
+                $(".search-icon").click(function(){
+                    $(".search-box").toggle();
+                    $(".search-box input[type='text']").focus();
+                });
+            });
+            
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#pic').attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+            function checkpassword(password,cpwd){
+            if(password != cpwd){
+                alert("Password does not match");
+                return false;
+                }
+            }
+
+            $("#submitbtn").click(function(){
+            var password = $("#password").val();
+            var cpwd = $("#cpwd").val();
+
+            if (checkpassword(password,cpwd) == false)
+            {
+                $("#password").css("backgroundColor","red");
+                $("#cpwd").css("backgroundColor","red");
+                return false;
+            }
+            else
+                return true;
+            // $("form").submit(function() {return false;});
+            
+
+
+        });
+        </script>     
+        
+        
+        
+    </body>
+    
+    
+</html>

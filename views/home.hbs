@@ -1,0 +1,50 @@
+<head>
+    <title>Home</title>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="css/navstyle.css">
+    <link rel="stylesheet" href="css/homestyle.css">
+    
+    <script>
+        $(document).ready(function(){
+            $(".search-icon").click(function(){
+                $(".search-box").toggle();
+                $(".search-box input[type='text']").focus();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id = "message">
+        <div class = "icons">
+            <i class = "material-icons">favorite</i>
+        </div>One thousand flavors in one place...</div>
+        
+        <div id = "featured">
+            <div class = "icons">
+                <i class="fa fa-utensils"></i>
+            </div>
+            
+            
+            <div id = "featuredheading">
+                Featured Recipes
+            </div>
+            
+            <div id = "posts">
+                {{#each recipe_post}}
+                    <div class = "post"> <!-- Done! -->
+                        <a href ="../recipepost/arrenantioquia-no-prof/recipe2-arrenantioquia.html">
+                        <img src ="{{this.img}}" alt = "{{recipe_name}}" class = "recipeimg"></a> 
+                        <a href ="../profile/np-arren/profile-arrenantioquia.html"><div class = "recipeowner">{{recipe_owner}}</div></a>
+                        <a href ="../recipepost/arrenantioquia-no-prof/recipe2-arrenantioquia.html">
+                        <div class = "recipename">{{recipe_name}}</div></a>
+                    </div>
+                {{/each}}
+            </div>
+    </div>
+</body>

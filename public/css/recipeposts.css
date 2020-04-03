@@ -1,0 +1,110 @@
+#wholepost {
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    background-color:  #bcd9ea;
+}
+            
+#posts {
+    width: 750px;
+    height: auto;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+    flex-direction: column;
+    background: #FFEDE3;
+}
+
+.content {
+    width: 650px;
+    height: auto;
+    border-style: solid;
+    border-width: thin;
+    border-color: lightslategray;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 30px;   
+    background-color: #FFEDE3;
+    overflow:hidden;
+}
+
+.content:hover{
+    background-color: #ffddca;
+}
+            
+#headingpost {
+    font-family: sans-serif cursive;
+    font-style: bold;
+    font-size: 50px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+            
+.buttons{
+    width: 150px;
+    font-family: sans-serif;
+    background-color: #576A7A;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.posting {
+    width: 600px;
+    height: 600px;
+    object-fit: cover;
+}
+            
+.recipe-name {
+    font-size: 40px;
+    font-family: Brush Script MT;
+    color: black;
+}
+
+.recipe-name:hover{
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+    
+}
+            
+.recipedesc{
+    font-size: 20px;
+    font-family: sans-serif;
+    text-align: justify;
+    margin-top: 10px;
+    color: black;
+}
+
+.button-delete{
+    width: 80px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    font-family: sans-serif;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    margin-top: 20px;
+}    
+
+.button-delete:hover{
+    background-color: #005255;
+    color: white !important;
+	transition: .25s;
+}   
+

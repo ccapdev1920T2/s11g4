@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <title>Red Velvet Cupcakes</title> <!-- EDIT THIS -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/navstyle.css">
+        <link rel="stylesheet" href="../css/recipepoststyle.css">
+        
+        <script>
+            $(document).ready(function(){
+                $(".search-icon").click(function(){
+                    $(".search-box").toggle();
+                    $(".search-box input[type='text']").focus();
+                });
+            });
+        </script>
+    </head>
+    
+    <body>
+
+    <div id = "whole">
+        {{#each recipe_post}}
+    <div class="jumbotron custom">
+        <div> <span id = "recipe-name"> {{recipe_name}} </span> </div> <!-- EDIT THIS -->
+          
+        <a id = "username" href="#"><span class = "uname"> <img src ="{{profilepic}}" id = "imageprof"> {{recipe_owner}} </span></a> <!-- EDIT THIS -->
+        <a href="../../feed/feed-with-account/desserts.html"><span id = "catname"> <i class="far fa-list-alt icon" style = "color: #F26A2D;"></i> {{recipe_category}} </span></a> <!-- EDIT THIS -->
+        <span id = "numfav" onclick="updateNumFav()"> <i class="fa fa-heart" onclick="updateUpvote()" id = "numFav" style = "cursor: pointer;"></i> {{numFav}} Favorites</span> <!-- EDIT THIS -->
+        <span id = "numupvote"> <button id="upvoteButton" recipeId="{{_id}}" onclick="updateUpvote()">Upvote</button> <span id = "counter"></span> {{numUpvote}} Upvotes</span> <!-- NEWWWW -->
+        <span id = "hello">.</span>
+        <span id = "hi">.</span>
+
+        <p id = "recipedesc">{{recipe_description}} </p> <!-- EDIT THIS -->
+    </div>
+    
+    <div class="container-fluid">
+          <div class="row custom">
+              <div class="col-sm-3" style="background-color:#FFEDE3;">
+                  <div id = "ingredientsheader">Ingredients </div>
+                  
+<pre> <!-- EDIT THIS -->
+{{{recipe_ingredients}}} <!-- PROBLEM!!! -->
+
+</pre>
+
+              </div>
+              
+              <div class="col-sm-5" style="background-color: #FFEDE3;">
+                  <div id = "proceduresheader"> Procedures </div>
+                  
+<pre> <!-- EDIT THIS -->        <!-- PROBLEM!!! -->
+{{{recipe_procedures}}}
+</pre>
+              </div>
+                
+            <div class="col-sm-4 ingredient-container" style="background-color:#bcd9ea;">
+                <div id = "recipe-pic">
+                <img src = "{{this.recipe_img}}" id = "recipe-pic"></div> <!-- EDIT THIS -->
+            </div>
+                
+                
+              
+
+          </div>
+           {{/each}}
+        </div>
+        
+            <div class = "comm">
+                <h4>Leave a Comment:</h4>
+                <form role="form">
+                    <div class="form-group">
+                        <textarea class="form-control comments" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+                <br><br>
+            </div>           
+        
+
+        
+    
+        
+        <div id = "comm-sec">
+            <h4> Comments </h4>
+            
+            
+            <div class = "comment"> 
+                <div class = "commprofcontainer"><img src = "{{this.commenter_img}}" class = "commprof"></div> <!-- EDIT THIS -->
+                <div class = "commdetails"> 
+                    <a id = "commid" href="../../profile/not-own-gian/not-own-profile-giantiyan.html"><span class = "uname"> {{commenter_name}} </span></a><span id= "edited1">(Edited) </span>  <br> <!-- EDIT THIS -->
+                    <textarea rows="3" cols="90" id = "commtext2" class = "commtext" spellcheck="false" readonly> {{comment}}
+                    </textarea> <!-- EDIT THIS -->
+                </div>
+                <div class = "buttons">
+                    <button type="button" id = "2" onClick = "doThis(this.id)" class="btn btn-dark button-edit">Edit</button>
+                    <button type="button" class="btn btn-danger button-delete">X</button> 
+                </div>
+            </div>
+            
+
+            
+        </div>
+        
+        
+
+        <script>
+            var hello = document.getElementById("hello").innerHTML;
+            document.getElementById('hello').style.color = "#bcd9ea";
+            var path = "/recipe/" + window.location.href
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('/') + 1);;
+                if (hello == ".")
+                {
+                    document.getElementById('numUpvote').style.color = "#F26A2D";
+                }
+                else
+                {
+                    document.getElementById('numUpvote').style.color = "#8da1b3";
+                }
+            document.getElementById('hi').style.color = "#bcd9ea";
+            var hi = document.getElementById("hi").innerHTML;
+                if (hi == ".")
+                {
+                    document.getElementById('numFav').style.color = "#F26A2D";
+                }
+                else
+                {
+                    document.getElementById('numFav').style.color = "#8da1b3";
+                }
+
+            /* function updateNumUpvote(){
+                if ($("#numUpvote").val() == "upvoted")
+                {
+                    document.getElementById('numUpvote').style.color = "gray";
+                    $('#numUpvote').val("a");
+                }
+                else
+                {
+                    document.getElementById('numUpvote').style.color = "#F26A2D";
+                    $('#numUpvote').val("upvoted");
+                }
+            } */
+
+
+            // NEWWWW
+            
+            function updateUpvote(){
+                var id = $('#upvoteButton').attr('recipeId');
+
+                fetch('/recipes/upvote/' + id, {method: 'POST'})
+                    .then(function(response) {
+                    if(response.ok) {
+                        console.log('Click was recorded');
+                        window.location.assign("/recipes/" + id);
+                    }
+                    throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                    console.log(error);
+                    });
+                    
+            }
+                
+            function updateNumFav(){
+                var hi = document.getElementById("hi").innerHTML;
+                if (hi == ".")
+                {
+                    document.getElementById('numFav').style.color = "#8da1b3";
+                    document.getElementById("hi").innerHTML = "";
+                }
+                else
+                {
+                    document.getElementById('numFav').style.color = "#F26A2D";
+                    document.getElementById("hi").innerHTML = ".";
+                }
+            }
+            
+            function doThis(clicked) {
+                var gian = document.getElementById(clicked).innerHTML;
+                
+                if (gian == "Save"){
+                    var hello = "#commtext" + clicked;
+                    var count = "#" + clicked;
+                    $(hello).attr("readonly", true);
+                    $(count).html("Edit");
+                    $("#edited1").css("display", "inline");
+                    return false;
+                }
+                
+                if (gian == "Edit"){
+                    var hello = "#commtext" + clicked;
+                    var count = "#" + clicked;
+                    $(hello).attr("readonly", false);
+                    $(count).html("Save");
+                    return false;
+                }
+                
+            }
+            
+            $(document).ready(function(){
+                $(".button-delete").click(function(){
+                $(this).parent().parent().remove();
+              });
+
+            });
+        </script>
+
+	
+
+        
+  </body>
+    
+</html>

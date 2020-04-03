@@ -1,0 +1,141 @@
+body {
+    background-color: #bcd9ea;
+}
+
+#wholepost {
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+    margin-bottom: 40px;
+   
+}
+
+#posts {
+    width: 750px;
+    height: auto;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    margin-top: 100px;
+    flex-direction: column;
+    background-color: #FFEDE3;
+    border-radius: 5px;
+}
+
+#headingpost {
+    font-family: sans-serif;
+    font-style: bold;
+    font-size: 50px;
+    padding: 0px;
+    margin-bottom: 0px;
+    font-family: sans-serif; letter-spacing: 2px; font-weight: bolder;
+}
+
+#content {
+    width: 650px;
+    height: auto;
+    border-style: solid;
+    border-width: thin;
+    border-color: lightslategray;
+    margin-top: 20px;
+    margin-left: 30px; 
+    display: flex;
+}
+
+
+.postpic {
+    height: 250px;
+}
+.posting {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.recipe-name {
+    font-family: Brush Script MT;
+    font-size: 30px;
+    padding-left: 10px;
+    padding-top: 5px;
+    color: black;
+}
+
+#imageprof {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 5px;
+    display: block;
+}
+
+.uname-cat {
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.icon {
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.postdesc {
+    font-family: sans-serif;
+    margin-top: 10px;
+    font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    text-align: justify;
+    color: black;
+}
+
+
+.category-title{
+    margin: 24px;
+    
+}
+
+
+.categories{
+    background-color: #FFEDE3;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 350px;
+    height: auto;
+    margin-top: 100px;
+    margin-left: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 10%;
+    font-family: sans-serif;
+}
+
+.categories ul{
+    border-top: 1px solid #e0e0e0;
+    margin-top: 15px;
+}
+
+.categories ul li a{
+    border-bottom: 1px solid #e0e0e0;
+    display: block;
+    padding: 15px 0px 15px 0px;
+    transition: all 0.3s;
+}
+
+.categories ul li a:hover, .categories ul li a.active{
+    padding-left: 15px;
+    transition: all 0.3s;
+    color: #FA773C;
+}
+
+
+
+
+
+
+
+

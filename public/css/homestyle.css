@@ -1,0 +1,112 @@
+body {
+	background-color: #bcd9ea;
+;
+}
+#message {
+    height: 250px;
+    font-family: playfair display;
+	font-style: italic;
+    font-size: 60px;
+    color: #576A7A;
+    width: 90%;
+    align-items: center;
+    border-bottom: solid 2px;
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: auto;
+    padding-bottom: auto;
+}
+
+.material-icons{
+    font-size: 40px;
+    color:#FA773C;
+    padding-top: 25px;
+}
+
+.icons{
+    font-size: 40px;
+    color:#FA773C;
+    padding-top: 25px;
+}
+
+#featured {
+	height: auto;
+    font-family: playfair display;
+	font-style: italic;
+    font-size: 60px;
+    color: #576A7A;
+    justify-content: center;
+    width: 90%;
+    align-items: center;
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+	padding-top: 50px;
+}
+
+#posts {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.post {
+	position: relative;
+	text-align: center;
+	height: 500px;
+	width: 500px;
+	margin-top: 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.recipeimg {
+	height: 500px;
+	width: 500px;
+	filter: brightness(75%);
+	transition: 0.3s;
+    object-fit: cover;
+	cursor: pointer;
+}
+
+.recipeimg:hover {
+	height: 500px;
+	width: 500px;
+	filter: brightness(90%);
+	transition: 0.3s;
+}
+
+.recipeowner {
+	position: absolute;
+  	top: 18px;
+	left: 18px;
+	font-size: 18px;
+	color: white;
+	font-weight: bold;
+	font-family: sans-serif;
+	font-style: normal;
+	color: black;
+	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 0.25px;
+	-webkit-text-stroke-color: black;
+}
+
+.recipename {
+	position: absolute;
+  	bottom: 18px;
+	left: 18px;
+	font-size: 26px;
+	color: white;
+	font-weight: bold;
+	font-family: sans-serif;
+	font-style: normal;
+	color: black;
+	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 0.30px;
+	-webkit-text-stroke-color: black;
+}
