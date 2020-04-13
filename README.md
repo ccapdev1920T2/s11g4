@@ -4,8 +4,8 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 ### Getting Started
 1. Make sure to have Node.js installed  
 1. Clone/ Download the repository and extract the zip file  
-1. Make sure to install the npm modules with `npm install`  
-1. Set up the Node.js server with `node index.js`  
+1. Make sure to install the npm modules with `npm install`
+1. Set up the Node.js server with `node index.js` or `npm start`
 1. Access the application through `localhost:3000` in Google Chrome  
 
 ### Running Tests
@@ -21,8 +21,8 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 |arrenantioquia|pass123|
 |yohancai|pass123|
 
-* If the user opts not to log in nor register, he/she can still browse through recipes. However, the user would have limited features such as he/she cannot comment on recipes, or add recipes and users to his/her favorites  
-* Users who have logged in can create recipes, comment (and delete their comment) on recipes, add recipes/users to favorites, and the likes  
+* If the user opts not to log in nor register, he/she can still browse through recipes. However, the user would have limited features such as he/she cannot comment on recipes, upvote on recipes, and add recipes/users to his/her favorites  
+* Users who have logged in can create recipes, comment (and delete their comment) on recipes, upvote on recipes, add recipes/users to favorites, and the likes  
 
 ### Important Notes
 * Be patient as there are some pages in the site that load slower than others, ie. recipes page  
