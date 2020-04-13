@@ -23,6 +23,7 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 
 * If the user opts not to log in nor register, he/she can still browse through recipes. However, the user would have limited features such as he/she cannot comment on recipes, upvote on recipes, and add recipes/users to his/her favorites  
 * Users who have logged in can create recipes, comment (and delete their comment) on recipes, upvote on recipes, add recipes/users to favorites, and the likes  
+* The owner of a recipe can delete the comments of other users in his/her own recipe post. However, only the owner of the comments can edit their own comment
 
 ### Important Notes
 * Be patient as there are some pages in the site that load slower than others, ie. recipes page  
