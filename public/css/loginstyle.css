@@ -1,0 +1,63 @@
+body{
+    background:url('../img/banner1.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.wrap{
+    max-width: 500px;
+    border-radius: 20px;
+    margin:auto;
+    background: rgba(255, 237, 227,0.8);
+    box-sizing: border-box;
+    padding:40px;
+    color:#fff;
+    margin-top: 180px;
+}
+
+.wrap h2{
+    text-align: center;
+    font-family: sans-serif;
+    padding-bottom: 20px;
+    font-size: 30px;
+    color: #FA773C;
+}
+
+input[type='text']:not(.search-text), input[type=password], input[type=email]{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px 5px;
+    background: rgba(0,0,0,0.10);
+    outline: none;
+    border: none;
+    border-bottom: 0.5px solid gray;
+    color: #000;
+    border-radius: 5px;
+    margin:5px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+input[type=submit]:not(.search-button){
+    width:100%;
+    box-sizing: border-box;
+    padding:10px 0;
+    margin-top: 40px;
+    outline: none;
+    border: none;
+    background: #FA773C;
+    opacity: 0.7;
+    border-radius: 20px;
+    font-size: 20px;
+    color: white;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+input[type=submit]:hover{
+    background: #c25d2f;
+    opacity: 0.7;
+}

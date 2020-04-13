@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Create a Recipe</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="css/navstyle.css">
+        <link rel="stylesheet" href="css/createpoststyle.css">
+    </head>
+
+    <body>
+        <br><div id="headingpost">Create a Recipe</div> <br><br>
+
+        <div id="createpost">
+            <form id = "createrecipe" class = "createrecipe" action = "/recipes/insert" method = "POST" enctype="multipart/form-data">
+                <label for = "recipe_img">Upload an Image: <br></label><input type="file" id="recipe_img" name="recipe_img" accept="image/*" onchange="readURL(this);" required>
+                <img id="pic" src="" alt = ""><hr><br>
+                <label for = "recipe_name">Name of the Recipe: <br></label><input type="text" id="recipe_name" name="recipe_name" placeholder="Recipe Name" maxlength="34" required><hr><br>
+                <label for = "recipe_category">Category of the Recipe: <br><select id="recipe_category" name = "recipe_category">
+                    <option value="Appetizers & Snacks"> Appetizers & Snacks</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Desserts">Desserts</option>
+                    <option value="Drinks">Drinks</option>
+                    <option value="Lunch & Dinner">Lunch & Dinner</option>
+                    <option value="Pastries">Pastries</option>
+                    <option value="Salads">Salads</option>
+                    <option value="Others">Others</option>
+                </select><hr><br>
+                <label for = "recipe_description">Description of the Recipe: <br></label><textarea id="recipe_description" name="recipe_description" div="createpost" form = "createrecipe" placeholder="Enter description of the recipe here..." maxlength="280" required></textarea><hr><br>
+                <label for = "recipe_ingredients">Ingredients: <br></label><textarea id="recipe_ingredients" name="recipe_ingredients" div="createpost" form = "createrecipe" placeholder="Enter ingredients of the recipe here..." required></textarea><hr><br>
+                <label for = "recipe_procedures">Procedures: <br></label><textarea id="recipe_procedures" name="recipe_procedures" div="createpost" form = "createrecipe" placeholder="Enter procedures of the recipe here..." required></textarea><br><br>
+                <center><input type="submit" class="submitbtn" id="submitbtn" value="Post"></center>
+            </form>
+        </div>
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#pic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+    </body>
+</html>

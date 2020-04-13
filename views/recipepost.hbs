@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <title>{{recipe_name}}</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/navstyle.css">
+        <link rel="stylesheet" href="../css/recipepoststyle.css">
+        
+        <script>
+            $(document).ready(function(){
+                $(".search-icon").click(function(){
+                    $(".search-box").toggle();
+                    $(".search-box input[type='text']").focus();
+                });
+            });
+        </script>
+    </head>
+    
+    <body>
+
+    <div id = "whole">
+        {{#each recipe_post}}
+            <div class="jumbotron custom">
+                <div> <span id = "recipe-name"> {{recipe_name}} </span> </div> 
+                
+                <a id = "username" href="/profile/{{recipe_owner}}"> <img src ="{{profilepic}}" id = "imageprof" style = "margin-right: 5px;" onerror="this.src='../img/default.png'"><span class = "uname" id = "recipe_owner">{{recipe_owner}}</span></a>
+                <a id = "category_path" href="#"><span id = "catname"><i class="far fa-list-alt icon" style = "color: #F26A2D; margin-right: 5px;"></i><span id = "category_name">{{recipe_category}}</span></span></a>
+                <span id = "numUpvote"><i class="fas fa-chevron-up" recipeId="{{_id}}" onclick="updateUpvote()" id = "upvoteButton"></i> {{numUpvote}} Upvotes</span>
+                <!-- <span id = "numfav"> <input type="button" class = "buttons" id= "addtofavbtn" value = "Add to Favorites" onclick="favorite()"></span> -->
+                <button type="button" id = "{{_id}}" onClick = "addToFav(this.id)" class="btn btn-dark favButton" style="float:right; width: 150px;">{{favorited}}</button>
+                <p id = "recipedesc">{{recipe_description}} </p> 
+            </div>
+    
+    <div class="container-fluid">
+        <div class="row custom">
+            <div class="col-sm-3" style="background-color:#FFEDE3;">
+                <div id = "ingredientsheader">Ingredients</div>
+                  
+<pre> 
+{{{recipe_ingredients}}} 
+</pre>
+            </div>
+              
+            <div class="col-sm-5" style="background-color: #FFEDE3;">
+                <div id = "proceduresheader">Procedures</div>
+                  
+<pre> 
+{{{recipe_procedures}}}
+</pre>
+            </div>
+                
+            <div class="col-sm-4 ingredient-container" style="background-color:#bcd9ea;">
+                <div id = "recipe-pic">
+                <img src = "{{this.recipe_img}}" id = "recipe-pic" onerror="this.src='../img/defaultfood.jpg'"></div> 
+            </div>
+                
+        </div>
+        {{/each}}
+    </div>
+        
+    <div class="commentpart">
+        <div class = "comm">
+            <h4>Leave a Comment:</h4>
+                <div class="form-group">
+                    <textarea class="form-control comments" rows="3" id = "commentfield" name = "commentfield" required></textarea>
+                </div>
+                <input type="submit" class="btn btn-success" onclick="checkUser()" value = "Submit"> 
+            <br><br>
+        </div>           
+            
+        <div id = "comm-sec">
+            <h4> Comments </h4>
+            
+            {{#each comment}}
+            <div class = "comment"> 
+                <div class = "commprofcontainer"><a id = "commprofpic" href="/profile/{{commenter_name}}"><img src = "{{commenter_img}}" class = "commprof" onerror="this.src='../img/default.png'"></a></div> 
+                <div class = "commdetails"> 
+                    <a id = "commid" href="/profile/{{commenter_name}}"><span class = "uname username">{{commenter_name}}</span></a> <span id = "isTrue{{_id}}"> {{edited}} </span><br> 
+                    <textarea rows="3" cols="90" id = "edit{{_id}}" name = "commtext2" class = "commtext" spellcheck="false" readonly>{{content}}</textarea> 
+                </div>
+
+                <div class = "buttons" id = "buttons{{commenter_name}}">
+                    <button type="button" id = "{{_id}}" onClick = "doThis(this.id)" class="btn btn-dark button-edit">Edit</button>
+                    
+                    <form action = "/recipes/deleteComment/{{_id}}" method = "POST"> 
+                        <input type="submit" class="btn btn-danger button-delete" value = "X"> 
+                    </form>
+                </div> 
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="categories">
+        <h3 class="categories-title" style="font-family: sans-serif; letter-spacing: 2px; font-weight: bolder;">CATEGORIES</h3>
+        <ul id = "categories-list">
+            <li><a href="/recipes/appetizers-and-snacks" class = "" id = "appetizers-and-snacks"> Appetizers &amp; Snacks</a></li>
+            <li><a href="/recipes/breakfast" class = "" id = "breakfast">Breakfast</a></li>
+            <li><a href="/recipes/desserts" class = "" id = "desserts">Desserts</a></li>
+            <li><a href="/recipes/drinks" class = "" id = "drinks">Drinks</a></li>
+            <li><a href="/recipes/lunch-and-dinner" class = "" id = "lunch-and-dinner">Lunch &amp; Dinner</a></li>
+            <li><a href="/recipes/pastries" class = "" id = "pastries">Pastries</a></li>
+            <li><a href="/recipes/salads" class = "" id = "salads">Salads</a></li>
+            <li><a href="/recipes/others" class = "" id = "others">Others</a></li>
+            <li><a href="/recipes" class = "" id = "all-recipes">All Recipes</a></li>
+        </ul>
+    </div>
+        
+    <script>
+        var i = 0;
+        $('.comment').each(function(){
+            var user = document.getElementById('user').innerHTML;
+            var buttonID = "button" + user;
+            var commenter = document.getElementsByClassName('username')[i].innerHTML;
+            var editButton = document.getElementsByClassName('button-edit')[i];
+            var deleteButton = document.getElementsByClassName('button-delete')[i];
+            var recipeOwner = document.getElementById('recipe_owner').innerHTML;
+
+            if(user != commenter){
+                editButton.style.display = "none";
+                deleteButton.style.display = "none";
+            }
+            if (user == recipeOwner) {
+                deleteButton.style.display = "inline";
+            }
+            i++;
+        });
+
+        function addToFav(clicked) {
+            var isUser = document.getElementById('user').innerHTML;
+
+            if (isUser == "") {
+                alert("Please login or register to favorite a recipe!");
+                window.location.assign("/login");
+            }
+            else {
+                var url = window.location.pathname;
+                var id = url.substring(url.lastIndexOf('/') + 1);
+                var buttonVal = document.getElementById(clicked).innerHTML;
+
+                if (buttonVal == "Add to Favorites"){
+                    
+                    document.getElementById(clicked).innerHTML = "Favorited";
+
+                    fetch("/recipes/addToFav/" + id, {method: 'POST'})
+                    .then(function(response) {
+                        if(response.ok) {
+                            console.log('Click was recorded');
+                        //    window.location.assign("/recipes/" + id);
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                    return false;
+                }
+                else if (buttonVal == "Favorited") {
+                    document.getElementById(clicked).innerHTML = "Add to Favorites";
+                        fetch("/recipes/removeToFav/" + id, {method: 'POST'})
+                    .then(function(response) {
+                        if(response.ok) {
+                            console.log('Click was recorded');
+                        //    window.location.assign("/recipes/" + id);
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                    return false;
+                }
+            }
+        }
+
+        function checkUser() {
+            var x = document.getElementById('commentfield').value;
+
+            if (x == "") {
+                alert("Comment is empty.");
+            }
+            else {
+                var isUser = document.getElementById('user').innerHTML;
+
+                if (isUser == "") {
+                    alert("Please login or register to comment!");
+                    window.location.assign("/login");
+                }
+                else {
+                    var url = window.location.href;
+                    var recipeid = url.substring(url.lastIndexOf('/') + 1);
+                    var comment = document.getElementById('commentfield').value;
+
+                    fetch("/recipes/insertComment/" + recipeid + '/' + comment + '/', {method: 'POST'})
+                    .then(function(response) {
+                        if(response.ok) {
+                            console.log('Click was recorded');
+                            window.location.assign("/recipes/" + recipeid);
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                }
+            }
+        }
+
+        var cat = document.getElementById('category_name').innerHTML;
+
+        if (cat == "Appetizers &amp; Snacks")
+        {
+            document.getElementById('category_path').href = "/recipes/appetizers-and-snacks";
+        }
+        else if (cat == "Breakfast")
+        {
+            document.getElementById('category_path').href = "/recipes/breakfast";
+        }
+        else if (cat == "Desserts")
+        {
+            document.getElementById('category_path').href = "/recipes/desserts";
+        }
+        else if (cat == "Drinks")
+        {
+            document.getElementById('category_path').href = "/recipes/drinks";
+        }
+        else if (cat == "Lunch &amp; Dinner")
+        {
+            document.getElementById('category_path').href = "/recipes/lunch-and-dinner";
+        }
+        else if (cat == "Pastries")
+        {
+            document.getElementById('category_path').href = "/recipes/pastries";
+        }
+        else if (cat == "Salads")
+        {
+            document.getElementById('category_path').href = "/recipes/salads";
+        }
+        else if (cat == "Others")
+        {
+            document.getElementById('category_path').href = "/recipes/others";
+        }
+
+        var path = "/recipe/" + window.location.href
+        var url = window.location.href;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        
+        function updateUpvote(){
+            var isUser = document.getElementById('user').innerHTML;
+
+            if (isUser == "") {
+                    alert("Please login or register to upvote!");
+                    window.location.assign("/login");
+            }
+            else {
+                var id = $('#upvoteButton').attr('recipeId');
+
+                fetch('/recipes/upvote/' + id, {method: 'POST'})
+                .then(function(response) {
+                    if(response.ok) {
+                        console.log('Click was recorded');
+                        window.location.assign("/recipes/" + id);
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            }
+        }
+        
+        function doThis(clicked) {
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            var buttonVal = document.getElementById(clicked).innerHTML;
+
+            if (buttonVal == "Edit"){
+                var textID = "#edit" + clicked;
+                var editID = "#" + clicked;
+                $(textID).css("background-color", "white");
+                $(textID).attr("readonly", false);
+                document.getElementById(clicked).innerHTML = "Save";
+                return false;
+            }
+            else if (buttonVal == "Save"){
+                var textID = "edit" + clicked;
+                var text = document.getElementById(textID).value;
+                
+                fetch("/recipes/editComment/" + id + '/' + clicked + '/' + text + '/', {method: 'POST'})
+                .then(function(response) {
+                    if(response.ok) {
+                        console.log('Click was recorded');
+                        window.location.assign("/recipes/" + id);
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+
+                var edit = "isTrue" + clicked;
+                var isEdited = document.getElementById(edit).innerHTML;
+
+                if (isEdited == " true ") {
+                    var changeEdit = "edited" + clicked;
+                    $("#edited" + clicked).css("display", "inline");
+                }
+            }
+        }
+    </script>
+  </body>
+</html>

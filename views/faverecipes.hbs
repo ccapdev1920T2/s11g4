@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <title>{{fullname}}'s Favorite Recipes</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="../css/navstyle.css">
+        <link rel="stylesheet" href="../css/recipeposts.css">
+        <link rel="stylesheet" href="../css/profilestyle.css">
+        
+        <script>
+            $(document).ready(function(){
+                $(".search-icon").click(function(){
+                    $(".search-box").toggle();
+                    $(".search-box input[type='text']").focus();
+                });
+            });
+            
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#pic').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            function openEditForm() {
+                var profilenamevalue = document.getElementById("profilename").getAttribute('profilenameid');
+                var unamevalue = document.getElementById("uname").getAttribute('unameid');
+                var credibilityvalue = document.getElementById("credibility").getAttribute('credibilityid');
+
+                document.getElementById("editForm").style.display = "block";
+                document.getElementById("disablediv").style.display = "block";
+
+                document.getElementById("editprofilename").value = profilenamevalue;
+                document.getElementById("editusername").value = unamevalue;
+                document.getElementById("editcredibility").value = credibilityvalue;
+            }
+
+            function closeEditForm() {
+                document.getElementById("editForm").style.display = "none";
+                document.getElementById("disablediv").style.display = "none";
+            }   
+
+            function saveEditForm() {
+                document.getElementById("editForm").style.display = "none";
+                window.location.href="/profile/saveEdit";
+            }
+        </script>
+    </head>
+    
+    <body>
+        <div id = "wholepost">
+        {{#each profile}}
+            <div id = "profile">
+                <img src="{{profilepic}}" id ="imageprof" alt="Avatar" onerror="this.src='../img/default.png'">
+                <div id = "profilename" profilenameid="{{fullname}}"> {{fullname}} </div>
+                <a href="/profile/{{uname}}"><div id = "uname" name = "uname" unameid="{{uname}}">@{{uname}}</div></a>
+                <div class = "usercredibility" style="align-items: center; justify-content: center;">
+                    <i class = "material-icons">verified_user</i>
+                    <div id = "credibility" credibilityid="{{credibility}}"> {{credibility}} </div>
+                </div>
+
+                <div id = "favorites"></div>
+                
+                <input type="button" class = "buttons" value = "Edit Profile" id = "editprofilebtn" onclick = "openEditForm()">
+                <a href ="/profile/faveuser"><input type="button" class = "buttons" id ="favusersbtn" value = "Favorite Users"></a>
+                <a href ="/profile/faverecipes"><input type="button" class = "buttons" id ="favrecipesbtn" value = "Favorite Recipes" style="background-color: #005255;color: white !important;"></a>
+            </div>  
+        {{/each}}
+        
+            <div id = "posts">
+                <div id = "headingpost">Favorite Recipes<br></div>
+                
+                {{#each favrecipes}}
+                <div class = "content">
+                    <a href="/recipes/{{_id}}">
+                    <img src = "{{recipe_img}}" class = "posting" onerror="this.src='../img/defaultfood.jpg'">
+                    <span class = "recipe-name"> {{recipe_name}} </span> <br>
+                    <p class = "recipedesc">{{recipe_description}}</p>
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+            
+            <div class="form-popup" id="editForm">
+                <form action = "/profile/updateProfile" method = "POST" class="form-container" enctype="multipart/form-data">
+                    <h1>Edit Profile</h1>
+                    
+                    <div><label for="editimageprof"><b>Profile Picture</b></label></div>
+                    <input type="file" id="editimageprof" name="editimageprof" accept="image/*" onchange="readURL(this)" onerror="this.src='../img/default.png'" required>
+
+                    <div><label for="editprofilename"><b>Full Name</b></label></div>
+                    <input type="text" placeholder="" id="editprofilename" name="editprofilename" maxlength="50">
+
+                    <div><label for="editusername"><b>Username</b></label></div>
+                    <input type="text" placeholder="" id="editusername" name="editusername" maxlength="20">
+                    
+                    <div><label for="credibility"><b>Credibility</b></label></div>
+                    <input type="text" placeholder="" id="editcredibility" name="credibility" maxlength="40">
+
+                    <div class="btn-container">
+                        <input type="submit" class="btn" value="Save">
+                        <button type="button" class="btn cancel" onclick="closeEditForm()">Close</button>
+                    </div>
+                </form>
+            </div>
+                
+            <div id="disablediv"></div>
+        </div>
+  </body>
+</html>
