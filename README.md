@@ -1,4 +1,4 @@
-# Recipy (S11g4)
+# -![#FA773C](https://placehold.it/15/FA773C/000000?text=+) `Recipy (S11g4)`
 Recipy is a website wherein users can share recipes, save recipes and other users. Complete features of the application can be found in the project specification **Group 4 S11 MP Specification.pdf**
 
 ### Getting Started
@@ -27,7 +27,7 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 
 ### Important Notes
 * Be patient as there are some pages in the site that load slower than others, ie. recipes page  
-* Wait for the page to refresh when upvoting, deleting comments and recipes, adding comments, editing comments, and the likes  
+* Take note that the validation of sign up is slow
 
 ### Built With 
 * Visual Studio Code  
@@ -36,6 +36,27 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 
 ### Versioning
 The members use **Shared Drives (Gogle Drive)** for versioning  
+
+### Dependencies
+* Express  
+* Express-handlers  
+* Express-session  
+* Assert  
+* Bcryptjs  
+* Body-parser  
+* Connect-flash  
+* Cookie-parser  
+* Cookie-session  
+* Dontenv  
+* Handlebars  
+* Install  
+* Moment  
+* Mongoose  
+* Multer  
+* Nodemon  
+* Npm  
+* Passport  
+* Passport-local  
 
 ### Members of the Group
 * Gian Chan  
