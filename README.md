@@ -1,4 +1,4 @@
-# -![#FA773C](https://placehold.it/15/FA773C/000000?text=+) `Recipy (S11g4)`
+# ![#FA773C](https://placehold.it/15/FA773C/000000?text=+) `Recipy (S11g4)`
 Recipy is a website wherein users can share recipes, save recipes and other users. Complete features of the application can be found in the project specification **Group 4 S11 MP Specification.pdf**
 
 ### Getting Started
