@@ -29,7 +29,7 @@
         }
         
         function favorite() {
-            var isUser = document.getElementById('user').innerHTML;
+            var isUser = document.getElementById('user').textContent;
 
             if (isUser == "") {
                     alert("Please login or register to favorite a user!");
@@ -38,11 +38,11 @@
             else {
                 var url = window.location.pathname;
                 var id = url.substring(url.lastIndexOf('/') + 1);
-                var buttonVal = document.getElementById('addtofavbtn').innerHTML;
+                var buttonVal = document.getElementById('addtofavbtn').textContent;
                 
                 if (buttonVal == "Add to Favorites") {
                     
-                    document.getElementById('addtofavbtn').innerHTML = "Favorited";
+                    document.getElementById('addtofavbtn').textContent = "Favorited";
 
                     fetch("/profile/addToFav/" + id, {method: 'POST'})
                     .then(function(response) {
@@ -58,7 +58,7 @@
                     return false;
                 }
                 else if (buttonVal == "Favorited") {
-                    document.getElementById('addtofavbtn').innerHTML = "Add to Favorites";
+                    document.getElementById('addtofavbtn').textContent = "Add to Favorites";
 
                     fetch("/profile/removeToFav/" + id, {method: 'POST'})
                     .then(function(response) {
@@ -132,15 +132,15 @@
             
             {{#each recipes}}
             <div class = "content">
-                <form action = "/profile/deleteRecipe/{{recipe_name}}" method = "POST"> 
+                
                 <input type="hidden" name="_token" id="csrf-token"/>
                 <a href="/recipes/{{_id}}"> 
                     <img src = "{{recipe_img}}" class = "posting" onerror="this.src='../img/defaultfood.jpg'">
                     <span class = "recipe-name" id = "recipename"> {{recipe_name}} </span> <br>
                     <p class = "recipedesc">{{recipe_description}}</p>
                 </a>
-                <input type="submit" class = "button-delete" id="deletebtn" value = "Delete">
-                </form> 
+             <!--   <input type="submit" class = "button-delete" id="deletebtn" value = "Delete"> -->
+                <button type="button" id = "{{recipe_name}}" onClick = "deleteThis(this.id)" class="button-delete">Delete</button> 
             </div>
             {{/each}}
         </div>
@@ -172,7 +172,29 @@
     </div>
 
     <script>
-            var uservalue = document.getElementById('user').innerHTML;
+
+        $(".button-delete").click(function(){
+                $(this).parent().remove();
+        });
+
+        //<form action = "/profile/deleteRecipe/{{recipe_name}}" method = "POST"> 
+        function deleteThis(clicked) {
+            
+            fetch("/profile/deleteRecipe/" + clicked, {method: 'POST'})
+                    .then(function(response) {
+                        if(response.ok) {
+                            console.log('Click was recorded');
+                        //    window.location.assign("/recipes/" + id);
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                    return false;
+        }
+
+            var uservalue = document.getElementById('user').textContent;
             var unamevalue = document.getElementById('uname').getAttribute('unameid');
             var editProfileButton = document.getElementById('editprofilebtn');
             var favUsersButton = document.getElementById('favusersbtn');

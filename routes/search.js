@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport =  require('passport');  
 
+const searchcontroller = require('../controller/searchcontroller.js');
+
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(session({
@@ -18,44 +20,7 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
-function getSchema () {
-    var s = mongoose.Schema({
-        array: [String]
-    });
-    s.index({ array: 'text' })
-    return s;
-}
-
-router.post('/', function(req, res) {
-    console.log('SEARCH RESULTS: ' + req.isAuthenticated());
-    console.log('Searching for a recipe: ' + req.body.searchtext);
-    var userinput = req.body.searchtext;
-    var recipes = [];
-
-    mongoose.connect(url, { 
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }, function(err,db) {
-        var sort = { recipe_name: 1 }; 
-        assert.equal(null, err);
-        var cursor = db.collection('recipes').find({'recipe_name': { '$regex': userinput, '$options': 'i'}}).sort(sort);
-        cursor.forEach(function(doc, err) {
-            assert.equal(null, err);
-            recipes.push(doc);
-        }, function() {
-            res.render('home', {
-                headingtitle: 'Search Results',
-                searchresults: 'You searched for: ',
-                searchfor: userinput,
-                search_post: recipes,
-                profileurl: '/profile/' + req.session.uname,
-                isLoggedIn: req.session.isLoggedIn, 
-                pagename: '',
-                title: 'Search Results'
-            });
-        });
-    });
-});
+router.post('/', searchcontroller.postSearch);
 
 passport.serializeUser(function(id, done) {
     done(null, id);

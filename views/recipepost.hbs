@@ -73,7 +73,8 @@
                 <div class="form-group">
                     <textarea class="form-control comments" rows="3" id = "commentfield" name = "commentfield" required></textarea>
                 </div>
-                <input type="submit" class="btn btn-success" onclick="checkUser()" value = "Submit"> 
+                <button type="button" onClick = "checkUser()" class="btn btn-success">Submit</button>
+           <!--     <input type="submit" class="btn btn-success" onclick="checkUser()" value = "Submit">  -->
             <br><br>
         </div>           
             
@@ -90,10 +91,11 @@
 
                 <div class = "buttons" id = "buttons{{commenter_name}}">
                     <button type="button" id = "{{_id}}" onClick = "doThis(this.id)" class="btn btn-dark button-edit">Edit</button>
+                    <button type="button" id = "{{_id}}" onClick = "deleteThis(this.id)" class="btn btn-danger button-delete">X</button> 
                     
-                    <form action = "/recipes/deleteComment/{{_id}}" method = "POST"> 
+                  <!--  <form action = "/recipes/deleteComment/{{_id}}" method = "POST"> 
                         <input type="submit" class="btn btn-danger button-delete" value = "X"> 
-                    </form>
+                    </form> -->
                 </div> 
             </div>
             {{/each}}
@@ -118,12 +120,12 @@
     <script>
         var i = 0;
         $('.comment').each(function(){
-            var user = document.getElementById('user').innerHTML;
+            var user = document.getElementById('user').textContent;
             var buttonID = "button" + user;
-            var commenter = document.getElementsByClassName('username')[i].innerHTML;
+            var commenter = document.getElementsByClassName('username')[i].textContent;
             var editButton = document.getElementsByClassName('button-edit')[i];
             var deleteButton = document.getElementsByClassName('button-delete')[i];
-            var recipeOwner = document.getElementById('recipe_owner').innerHTML;
+            var recipeOwner = document.getElementById('recipe_owner').textContent;
 
             if(user != commenter){
                 editButton.style.display = "none";
@@ -135,8 +137,28 @@
             i++;
         });
 
+        $(".button-delete").click(function(){
+                $(this).parent().parent().remove();
+        });
+
+        function deleteThis(clicked) {
+            
+            fetch("/recipes/deleteComment/" + clicked, {method: 'POST'})
+                    .then(function(response) {
+                        if(response.ok) {
+                            console.log('Click was recorded');
+                        //    window.location.assign("/recipes/" + id);
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                    return false;
+        }
+
         function addToFav(clicked) {
-            var isUser = document.getElementById('user').innerHTML;
+            var isUser = document.getElementById('user').textContent;
 
             if (isUser == "") {
                 alert("Please login or register to favorite a recipe!");
@@ -145,11 +167,11 @@
             else {
                 var url = window.location.pathname;
                 var id = url.substring(url.lastIndexOf('/') + 1);
-                var buttonVal = document.getElementById(clicked).innerHTML;
+                var buttonVal = document.getElementById(clicked).textContent;
 
                 if (buttonVal == "Add to Favorites"){
                     
-                    document.getElementById(clicked).innerHTML = "Favorited";
+                    document.getElementById(clicked).textContent = "Favorited";
 
                     fetch("/recipes/addToFav/" + id, {method: 'POST'})
                     .then(function(response) {
@@ -165,7 +187,7 @@
                     return false;
                 }
                 else if (buttonVal == "Favorited") {
-                    document.getElementById(clicked).innerHTML = "Add to Favorites";
+                    document.getElementById(clicked).textContent = "Add to Favorites";
                         fetch("/recipes/removeToFav/" + id, {method: 'POST'})
                     .then(function(response) {
                         if(response.ok) {
@@ -189,7 +211,7 @@
                 alert("Comment is empty.");
             }
             else {
-                var isUser = document.getElementById('user').innerHTML;
+                var isUser = document.getElementById('user').textContent;
 
                 if (isUser == "") {
                     alert("Please login or register to comment!");
@@ -204,18 +226,21 @@
                     .then(function(response) {
                         if(response.ok) {
                             console.log('Click was recorded');
-                            window.location.assign("/recipes/" + recipeid);
+                         //   window.top.location = window.top.location
+                             location.reload(true);
+                         //   window.location.assign("/recipes/" + recipeid);
                         }
                         throw new Error('Request failed.');
                     })
                     .catch(function(error) {
                         console.log(error);
                     });
+                    
                 }
             }
         }
 
-        var cat = document.getElementById('category_name').innerHTML;
+        var cat = document.getElementById('category_name').textContent;
 
         if (cat == "Appetizers &amp; Snacks")
         {
@@ -255,7 +280,7 @@
         var id = url.substring(url.lastIndexOf('/') + 1);
         
         function updateUpvote(){
-            var isUser = document.getElementById('user').innerHTML;
+            var isUser = document.getElementById('user').textContent;
 
             if (isUser == "") {
                     alert("Please login or register to upvote!");
@@ -268,7 +293,8 @@
                 .then(function(response) {
                     if(response.ok) {
                         console.log('Click was recorded');
-                        window.location.assign("/recipes/" + id);
+                        $("#numUpvote").load(" #numUpvote");
+                        //window.location.assign("/recipes/" + id);
                     }
                     throw new Error('Request failed.');
                 })
@@ -278,43 +304,46 @@
             }
         }
         
+        /* Change from here */
         function doThis(clicked) {
             var url = window.location.pathname;
             var id = url.substring(url.lastIndexOf('/') + 1);
-            var buttonVal = document.getElementById(clicked).innerHTML;
+            var buttonVal = document.getElementById(clicked).textContent;
+            
 
             if (buttonVal == "Edit"){
                 var textID = "#edit" + clicked;
                 var editID = "#" + clicked;
                 $(textID).css("background-color", "white");
                 $(textID).attr("readonly", false);
-                document.getElementById(clicked).innerHTML = "Save";
+                document.getElementById(clicked).textContent = "Save";
                 return false;
             }
             else if (buttonVal == "Save"){
                 var textID = "edit" + clicked;
                 var text = document.getElementById(textID).value;
-                
+                var edit = "isTrue" + clicked;
+                var isEdited = document.getElementById(edit).textContent;
+                document.getElementById(edit).textContent = "(edited)";
+                document.getElementById(textID).style.backgroundColor = "#f2f2f2";
+                document.getElementById(textID).setAttribute("readonly", "true");
+                document.getElementById(clicked).textContent = "Edit";
+
+
                 fetch("/recipes/editComment/" + id + '/' + clicked + '/' + text + '/', {method: 'POST'})
                 .then(function(response) {
                     if(response.ok) {
                         console.log('Click was recorded');
-                        window.location.assign("/recipes/" + id);
+                       // window.location.assign("/recipes/" + id);
+                       
                     }
                     throw new Error('Request failed.');
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
-
-                var edit = "isTrue" + clicked;
-                var isEdited = document.getElementById(edit).innerHTML;
-
-                if (isEdited == " true ") {
-                    var changeEdit = "edited" + clicked;
-                    $("#edited" + clicked).css("display", "inline");
-                }
             }
+            /* Change to here */
         }
     </script>
   </body>

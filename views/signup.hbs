@@ -16,7 +16,9 @@
             <h2>Sign Up Here</h2>
             <form id = "signup" class = "signup" action = "/login/insert" method = "POST" enctype="multipart/form-data">
                 <input type="text" id = "fullname" name = "fullname" class="fullnamebox" placeholder="Full Name" maxlength="50" required>
+                <p id="emailerror" style="margin-left: 5px; font-weight: bold; font-family: sans-serif; color: red; font-size: 10px"></p>
                 <input type="email" id = "email" name = "email" class="emailbox" placeholder="Email" maxlength="60" required>
+                <p id="unameerror" style="margin-left: 5px; font-weight: bold; font-family: sans-serif; color: red; font-size: 10px"></p>
                 <input type="text" id = "uname" name = "uname" class="usernamebox" placeholder="Username" maxlength="20" required>
                 <div class="tooltip">
                 <input type="text" id = "credibility" name = "credibility" class="credbilitybox" placeholder="Credibility" maxlength="25" required>
@@ -37,6 +39,41 @@
                     $(".search-box").toggle();
                     $(".search-box input[type='text']").focus();
                 });
+            
+                $("#email").keyup(function() {
+                    var email = $('#email').val();
+                    $.get('/login/getCheckEmail', {email: email}, function (result) {
+
+                        if(result.email == email) {
+                            $('#email').css('background-color', 'red');
+                            $('#emailerror').text('Email is already registered');
+                            $('#submitbtn').prop('disabled', true);
+                            
+                        }
+                        else {
+                            $('#email').css('background', 'rgba(0,0,0,0.10)');
+                            $('#emailerror').text('');
+                            $('#submitbtn').prop('disabled', false);
+                        }
+                    });                    
+                })
+
+                $("#uname").keyup(function() {
+                    var uname = $('#uname').val();
+                    $.get('/login/getCheckUsername', {uname: uname}, function (result) {
+
+                        if(result.uname == uname) {
+                            $('#uname').css('background-color', 'red');
+                            $('#unameerror').text('Username is already taken');
+                            $('#submitbtn').prop('disabled', true);
+                        }
+                        else {
+                            $('#uname').css('background', 'rgba(0,0,0,0.10)');
+                            $('#unameerror').text('');
+                            $('#submitbtn').prop('disabled', false);
+                        }
+                    });                    
+                })
             });
             
             function readURL(input) {

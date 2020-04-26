@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Profile = require('../models/Profile');
-const assert = require('assert');
 const mongoose = require('mongoose');
-const url = 'mongodb+srv://recipy:pass123@recipydb-nzcto.mongodb.net/test?retryWrites=true&w=majority';
-const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+
+const logincontroller = require('../controller/logincontroller.js');
 
 // passport config
 require('../config/passport')(passport);
@@ -54,82 +52,20 @@ router.use(passport.session());
 router.use(require('connect-flash')());
 
 // render login page
-router.get('/', (req,res) => res.render('login', {
-    profileurl: '/profile/' + req.session.uname,
-    isLoggedIn: req.session.isLoggedIn, 
-    pagename: 'Log In',
-    user: req.session.uname,
-    title: 'Log In'
-}));
+router.get('/', logincontroller.getLogin);
 
 // post login handle
-router.post('/logcheck', 
-    function(req, res, next) {
-        passport.authenticate('local', 
-        function(err, user, info) {
-            if(!user) {
-                res.redirect('/login');
-                console.log('Not a user!');
-            }
-            else {
-                req.login(user, function(error) {
-                    if (error) return next(error);
-                    req.session.uname = req.body.uname;
-                    req.session.isLoggedIn = true;
-                    var success = '/profile/' + req.session.uname;
-                    console.log('Request login successful!');
-                    res.redirect(success)
-                });
-            }
-        }) (req, res, next);
-        console.log("LOGIN: " + req.isAuthenticated());
-    }
-);
+router.post('/logcheck', logincontroller.postLogCheck);
 
 // render register page
-router.get('/register', (req,res) => res.render('signup', {
-    profileurl: '/profile/' + req.session.uname,
-    isLoggedIn: req.session.isLoggedIn,
-    pagename: 'Sign Up',
-    user: req.session.uname,
-    title: 'Sign Up'
-}));
+router.get('/register', logincontroller.getRegister);
+
+router.get('/getCheckEmail', logincontroller.getCheckEmail);
+
+router.get('/getCheckUsername', logincontroller.getCheckUsername);
 
 // post/register new user to database
-router.post('/insert', upload.single('imageprof'), function(req,res, next) {
-//    var filepath = '../img/' + filename;
-
-    var user = new Profile({
-//        profilepic: filepath,
-        email: req.body.email,
-        fullname: req.body.fullname,
-        uname: req.body.uname,
-        credibility:req.body.credibility,
-        password:req.body.password
-    });
-
-    // hash the password
-    bcrypt.genSalt(10, (err, salt) => 
-        bcrypt.hash(user.password, salt, (err,hash)=>{
-            if(err) throw err;
-            user.password = hash;
-        })
-    );
-
-    // connect to the db
-    mongoose.connect(url, { 
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }, function(err, db) {
-        assert.equal(null, err);
-        db.collection('profiles').insertOne(user, function(err,result) {
-            assert.equal(null, err);
-            console.log('New profile created');
-            res.redirect('/login');
-            // db.close();
-        });
-    });
-});
+router.post('/insert', upload.single('imageprof'), logincontroller.postInsert);
 
 passport.serializeUser(function(id, done) {
     done(null, id);
