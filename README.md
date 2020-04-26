@@ -8,6 +8,8 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 1. Set up the Node.js server with `node index.js` or `npm start`
 1. Access the application through `localhost:3000` in Google Chrome  
 
+#### Alternatively, use this link to access the website https://still-tundra-16667.herokuapp.com/
+
 ### Running Tests
 * Upon accessing the application, the user may opt to register, log in, or simply browse through the different recipes  
 * When registering, simply fill up the form  
@@ -58,7 +60,7 @@ The members use **Shared Drives (Gogle Drive)** for versioning
 * Passport  
 * Passport-local  
 
-### Members of the Group
+### Members of the Group (S11 Group 4)
 * Gian Chan  
 * Samantha Paulino  
 * Shimei Zhang  
