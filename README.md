@@ -29,7 +29,7 @@ Recipy is a website wherein users can share recipes, save recipes and other user
 
 ### Important Notes
 * Be patient as there are some pages in the site that load slower than others, ie. recipes page  
-* Take note that the validation of sign up is slow
+* Take note that the validation of the username in the sign up is slow
 
 ### Built With 
 * Visual Studio Code  
