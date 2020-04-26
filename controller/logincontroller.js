@@ -37,21 +37,6 @@ const logincontroller = {
         console.log("LOGIN: " + req.isAuthenticated());
     },
 
-    getCheckEmail: function(req, res) {
-        var email = req.query.email;
-
-        mongoose.connect(url, { 
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }, function(err, db) {
-            assert.equal(null, err);
-            db.collection('profiles').findOne({email: email}, 'email', function (err,result) {
-                assert.equal(null, err);
-                res.send(result);
-            });
-        });
-    },
-
     getCheckUsername: function(req, res) {
         var uname = req.query.uname;
 

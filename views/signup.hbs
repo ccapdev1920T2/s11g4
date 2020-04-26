@@ -39,24 +39,6 @@
                     $(".search-box").toggle();
                     $(".search-box input[type='text']").focus();
                 });
-            
-                $("#email").keyup(function() {
-                    var email = $('#email').val();
-                    $.get('/login/getCheckEmail', {email: email}, function (result) {
-
-                        if(result.email == email) {
-                            $('#email').css('background-color', 'red');
-                            $('#emailerror').text('Email is already registered');
-                            $('#submitbtn').prop('disabled', true);
-                            
-                        }
-                        else {
-                            $('#email').css('background', 'rgba(0,0,0,0.10)');
-                            $('#emailerror').text('');
-                            $('#submitbtn').prop('disabled', false);
-                        }
-                    });                    
-                })
 
                 $("#uname").keyup(function() {
                     var uname = $('#uname').val();
@@ -65,13 +47,14 @@
                         if(result.uname == uname) {
                             $('#uname').css('background-color', 'red');
                             $('#unameerror').text('Username is already taken');
-                            $('#submitbtn').prop('disabled', true);
+                            $('#submitbtn').prop('disabled', true);  
                         }
                         else {
                             $('#uname').css('background', 'rgba(0,0,0,0.10)');
                             $('#unameerror').text('');
-                            $('#submitbtn').prop('disabled', false);
+                            $('#submitbtn').prop('disabled', false);     
                         }
+                        return false;
                     });                    
                 })
             });

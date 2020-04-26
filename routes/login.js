@@ -60,8 +60,6 @@ router.post('/logcheck', logincontroller.postLogCheck);
 // render register page
 router.get('/register', logincontroller.getRegister);
 
-router.get('/getCheckEmail', logincontroller.getCheckEmail);
-
 router.get('/getCheckUsername', logincontroller.getCheckUsername);
 
 // post/register new user to database
